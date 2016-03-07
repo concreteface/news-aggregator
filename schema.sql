@@ -4,8 +4,10 @@
 
 DROP TABLE IF EXISTS articles;
 
-Define your schema here:
+-- Define your schema here:
 
 CREATE TABLE articles (
-  <column definitions go here>
+  title VARCHAR(255),
+  url VARCHAR(255),
+  description VARCHAR(255)
 );

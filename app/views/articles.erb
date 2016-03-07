@@ -1,0 +1,17 @@
+<div>
+  <a href="/articles/new">Submit New Article</a>
+  <h1>Articles:</h1>
+  <h3>
+    <% @articles.each do |row| %>
+    <ul>
+      <p>Title:
+        <%= row['title'] %></p>
+      <p>
+        <a target="_blank" href="<%= URI(" #{row['url' ]}") %>"><%= row['url'] %></a>
+      </p>
+      <p><%= row['description'] %></p>
+      <p>- - - - - - - - - -</p>
+    </ul>
+    <%end%>
+  </h3>
+</div>
