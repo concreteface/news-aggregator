@@ -43,28 +43,25 @@ post '/articles/new' do
     url_list << res['url']
   end
   url = URI.parse(params[:url].split.join)
-  if params[:url].empty?
-    @missing_url = true
-    @title = params[:title]
-    @description = params[:description]
-    erb :submit_article
-  elsif params[:description].length < 20
+  if params[:url].empty? || params[:title].empty? || params[:description].empty?
+    @missing_field = true
+  end
+  if params[:description].length < 20
     @short_description = true
-    @title = params[:title]
-    @url = params[:url]
-    erb :submit_article
-  elsif url.is_a?(URI::HTTP) == false
+  end
+  if url.is_a?(URI::HTTP) == false
     @invalid_url = true
-    @title = params[:title]
-    @description = params[:description]
-    erb :submit_article
-  elsif url_list.include? params[:url]
+  end
+  if url_list.include? params[:url]
     @repeat = true
-    @title = params[:title]
-    @description = params[:description]
-    erb :submit_article
-  else
+  end
+  @url = params[:url]
+  @title = params[:title]
+  @description = params[:description]
+  if !@repeat && !@invalid_url && !@short_description && !@missing_url
     db_connection {|conn| conn.exec_params("INSERT INTO articles (title, url, description) VALUES ($1, $2, $3)", [params[:title], params[:url], params[:description]])}
     redirect '/articles'
+  else erb :submit_article
   end
+
 end

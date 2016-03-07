@@ -1,4 +1,5 @@
 require "spec_helper"
+require 'launchy'
 
 feature "user adds article" do
   let(:title) { "Valid Title" }
@@ -71,6 +72,7 @@ feature "user adds article" do
       fill_in "URL", with: "invalid url"
       fill_in "Description", with: "hi mom"
       click_button "Submit"
+      
 
       expect(page).to have_content("Please completely fill out form")
       expect(page).to have_content("Invalid URL")
