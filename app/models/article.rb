@@ -44,36 +44,31 @@ class Article
   end
 
   def valid?
-    # existence_checker
+    valid = true
     if @title == '' || @url == '' || @description == ''
       @errors <<  "Please completely fill out form"
-      return false
+      valid = false
     end
-    if url_validator != 0
+    if url_validator != 0 && @url != ''
       @errors << "Invalid URL"
-      return false
+      valid = false
     end
     if existence_checker
       @errors << "Article with same url already submitted"
-      return false
+      valid = false
     end
-    if @description.length < 20
+    if @description.length < 20 && @description != ''
       @errors << "Description must be at least 20 characters long"
-      return false
+      valid = false
     end
-    return true
+    return valid
+  end
+
+  def save
+    if valid?
+      db_connection {|conn| conn.exec_params("INSERT INTO articles (title, url, description) VALUES ($1, $2, $3)", [@title, @url, @description])}
+      return true
+    else return false
+    end
   end
 end
-
-# def db_connection
-#   begin
-#     connection = PG.connect(dbname: "news_aggregator_development")
-#     yield(connection)
-#     ensure
-#     connection.close
-#   end
-# end
-# result = db_connection {|conn| conn.exec("SELECT * FROM articles")}
-# result.each do |res|
-#   puts res['url']
-# end
