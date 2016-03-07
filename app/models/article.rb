@@ -12,15 +12,6 @@ class Article
     @errors = []
   end
 
-  def db_connection
-    begin
-      connection = PG.connect(dbname: "news_aggregator_test")
-      yield(connection)
-      ensure
-      connection.close
-    end
-  end
-
   def self.all
     @articles = []
     @result = db_connection { |conn| conn.exec("SELECT * FROM articles") }
