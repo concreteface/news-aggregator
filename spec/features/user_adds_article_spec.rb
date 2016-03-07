@@ -18,7 +18,7 @@ feature "user adds article" do
     expect(page).to have_content(description)
   end
 
-  xcontext "invalid form submission" do
+  context "invalid form submission" do
     scenario "form not filled out completely" do
       visit "/articles/new"
       fill_in "Title", with: title
@@ -86,4 +86,3 @@ feature "user adds article" do
     end
   end
 end
-

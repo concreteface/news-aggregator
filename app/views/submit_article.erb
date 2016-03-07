@@ -1,21 +1,21 @@
 <% if @missing_url %>
   <div class='warning'>
-    Please enter a URL.
+    Please completely fill out form.
   </div>
 <% end %>
 <% if @short_description %>
   <div class='warning'>
-    Please enter a longer description.
+    Description must be at least 20 characters long
   </div>
 <% end %>
 <% if @invalid_url %>
   <div class='warning'>
-    Please enter a valid URL.
+    Invalid URL
   </div>
 <% end %>
 <% if @repeat %>
   <div class='warning'>
-    You already submitted an article with that URL.
+    Article with same url already submitted
   </div>
 <% end %>
 <div>

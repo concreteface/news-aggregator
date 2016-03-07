@@ -1,6 +1,7 @@
 require "sinatra"
 require "pg"
 require_relative "./app/models/article"
+require 'pry'
 
 set :views, File.join(File.dirname(__FILE__), "app", "views")
 
@@ -41,7 +42,7 @@ post '/articles/new' do
   result.each do |res|
     url_list << res['url']
   end
-  url = URI.parse(params[:url])
+  url = URI.parse(params[:url].split.join)
   if params[:url].empty?
     @missing_url = true
     @title = params[:title]

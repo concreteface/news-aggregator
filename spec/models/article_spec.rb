@@ -1,6 +1,6 @@
 require "spec_helper"
 
-xdescribe Article do
+describe Article do
   let(:title) { "Valid Title" }
   let(:url) { "https://www.google.com" }
   let(:description) { "Valid description text" }
