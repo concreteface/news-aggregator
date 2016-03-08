@@ -1,27 +1,13 @@
-<% if @missing_field %>
-  <div class='warning'>
-    Please completely fill out form.
-  </div>
-<% end %>
-<% if @short_description %>
-  <div class='warning'>
-    Description must be at least 20 characters long
-  </div>
-<% end %>
-<% if @invalid_url %>
-  <div class='warning'>
-    Invalid URL
-  </div>
-<% end %>
-<% if @repeat %>
-  <div class='warning'>
-    Article with same url already submitted
-  </div>
-<% end %>
-<div>
-<h1>Fill in article details below:</h1>
+<div class="alert callout row">
+  <% @errors.each do |error| %>
+  <p><%= error %></p>
+  <% end %>
 </div>
-<form action="/articles/new" method = "post">
+
+<div>
+  <h1>Fill in article details below:</h1>
+</div>
+<form action="/articles/new" method="post">
   <div class="row">
     <div class="medium-4 columns">
       <label>Title
@@ -39,7 +25,7 @@
       </label>
     </div>
     <div class="small-3 columns end">
-    <button type="submit" class="button">Submit Article</button>
+      <button type="submit" class="button">Submit Article</button>
     </div>
   </div>
 </form>
