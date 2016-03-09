@@ -1,10 +1,20 @@
-<div class="alert callout row">
-  <% @errors.each do |error| %>
-  <p><%= error %></p>
-  <% end %>
-</div>
-
 <div>
+  <nav aria-label="You are here:" role="navigation">
+  <ul class="breadcrumbs">
+    <li><a href="/">Home</a></li>
+    <li><a href="/articles">Article List</a></li>
+    <li>
+        <span class="show-for-sr">Current: </span> Submit Article
+      </li>
+  </ul>
+  </nav>
+  <% if !@errors.empty? %>
+  <div class="alert callout row">
+    <% @errors.each do |error| %>
+    <p><%= error %></p>
+    <% end %>
+  </div>
+  <% end %>
   <h1>Fill in article details below:</h1>
 </div>
 <form action="/articles/new" method="post">

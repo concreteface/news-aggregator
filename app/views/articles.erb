@@ -1,17 +1,31 @@
+<nav aria-label="You are here:" role="navigation">
+<ul class="breadcrumbs">
+  <li><a href="/">Home</a></li>
+  <li>
+      <span class="show-for-sr">Current: </span> Article List
+    </li>
+</ul>
+</nav>
+
+<table class="hover">
+  <thead>
+    <tr>
+      <th width="100">Title</th>
+      <th width="100">URL</th>
+      <th width="250">Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @articles.each do |row| %>
+    <tr>
+      <td><%= row['title'] %></td>
+      <td><a target="_blank" href="<%= URI("#{row['url']}") %>"><%= row['url'] %></a></td>
+      <td><%= row['description'] %></td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
+
 <div>
   <a href="/articles/new">Submit New Article</a>
-  <h1>Articles:</h1>
-  <h3>
-    <% @articles.each do |row| %>
-    <ul>
-      <p>Title:
-        <%= row['title'] %></p>
-      <p>
-        <a target="_blank" href="<%= URI("#{row['url']}") %>"><%= row['url'] %></a>
-      </p>
-      <p><%= row['description'] %></p>
-      <p>- - - - - - - - - -</p>
-    </ul>
-    <%end%>
-  </h3>
 </div>
